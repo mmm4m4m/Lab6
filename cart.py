@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from datetime import datetime
 
 
 class Cart:
@@ -7,11 +6,9 @@ class Cart:
         self.cart = {}
 
     def add_item_in_cart(self, item, quantity):
-        if item not in self.cart:
-            self.cart[item] = {'quantity': quantity,
-                               'price': item.price}
-        else:
-            self.cart[item]['quantity'] += quantity
+        self.cart.setdefault(item, {'quantity': 0,
+                                    'price': item.price})
+        self.cart[item]['quantity'] += quantity
 
     def remove_item_from_cart(self, item):
         self.cart.pop(item)
